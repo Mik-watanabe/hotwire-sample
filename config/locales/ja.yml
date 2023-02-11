@@ -1,0 +1,7 @@
+ja:
+  activerecord:
+    models:
+      client: お客様
+    attributes:
+      client: お名前
+      tel: 携帯番号
