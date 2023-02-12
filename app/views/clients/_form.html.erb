@@ -1,10 +1,36 @@
 <%# bootstrap_formを使ったフォームでは、form_withの代わりにbootstrap_form_withを使う %>
 <%# バリデーションエラーの表示はbootstrap_formが用意してくれるので、自前で用意する必要がなくなる %>
-<%= bootstrap_form_with(model: client) do |form| %>
+<%= turbo_frame_tag client do %>
+  <%= bootstrap_form_with(model: client) do |form| %>
+    <div class="row py-2 border-top">
+      <div class="col-4">
 
- <%# Bootstrapのclass属性もbootstrap_formが設定してくれるので、自前で用意する必要はない %>
- <%= form.text_field :name %>
- <%= form.text_field :tel %>
+        <%# skip_label: ラベルは不要 %>
+        <%# label_as_placeholder: ラベルをプレースホルダーとして使う %>
+        <%# wrapper: <div>ラッパーは不要 %>
+        <%# control_class: コントロールのclass属性を指定 %>
+        <%= form.text_field :name,
+                            skip_label: true,
+                            label_as_placeholder: true,
+                            wrapper: false,
+                            control_class: "form-control form-control-sm"
+        %>
+      </div>
+      <div class="col-4">
+        <%= form.text_field :tel,
+                              skip_label: true,
+                              label_as_placeholder: true,
+                              wrapper: false,
+                              control_class: "form-control form-control-sm"
+        %>
+      </div>
 
- <%= form.primary %>
+      <div class="col-4">
+        <div class="d-flex justify-content-end">
+          <%= form.primary class: "btn btn-primary btn-sm me-2" %>
+          <%= link_to "キャンセル", client, class: "btn btn-sm btn-outline-secondary" %>
+        </div>
+      </div>
+    </div>
+  <% end %>
 <% end %>
