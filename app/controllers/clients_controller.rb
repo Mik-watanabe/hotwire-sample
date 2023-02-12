@@ -1,5 +1,5 @@
 class ClientsController < ApplicationController
-  before_action :set_client, only: %i[ show edit update destroy ]
+  before_action :set_client, only: %i[show edit update destroy]
 
   # GET /clients
   def index
@@ -7,15 +7,14 @@ class ClientsController < ApplicationController
     @search = Client.ransack(params[:q])
 
     # デフォルトのソートをデフォルトのid降順にする
-    @search.sorts = "id desc" if @search.sorts.empty?
+    @search.sorts = 'id desc' if @search.sorts.empty?
 
     # @search.resultで検索結果となる@clientsを取得する
     @clients = @search.result.page(params[:page])
   end
 
   # GET /clients/1
-  def show
-  end
+  def show; end
 
   # GET /clients/new
   def new
@@ -23,15 +22,14 @@ class ClientsController < ApplicationController
   end
 
   # GET /clients/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /clients
   def create
     @client = Client.new(client_params)
 
     if @client.save
-      redirect_to @client, notice: "お客様情報を登録しました"
+      redirect_to @client, notice: 'お客様情報を登録しました'
     else
       render :new, status: :unprocessable_entity
     end
@@ -40,7 +38,10 @@ class ClientsController < ApplicationController
   # PATCH/PUT /clients/1
   def update
     if @client.update(client_params)
-      redirect_to @client, notice: "お客さま情報を更新しました"
+      # リダイレクトを削除(リダイレクトがないと、自動的に"render"が実行される。)
+      # redirect_to @client, notice: "お客さま情報を更新しました"
+      # 今回のリクエストのみ有効なnow.notice
+      flash.now.notice = 'お客様情報を更新しました。'
     else
       render :edit, status: :unprocessable_entity
     end
@@ -49,17 +50,18 @@ class ClientsController < ApplicationController
   # DELETE /clients/1
   def destroy
     @client.destroy
-    redirect_to clients_url, notice: "お客様情報を削除しました"
+    redirect_to clients_url, notice: 'お客様情報を削除しました'
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_client
-      @client = Client.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def client_params
-      params.require(:client).permit(:name, :tel)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_client
+    @client = Client.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def client_params
+    params.require(:client).permit(:name, :tel)
+  end
 end
