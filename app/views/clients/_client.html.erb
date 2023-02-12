@@ -1,14 +1,16 @@
-<div class="row py-2 border-top">
-  <div class="col-4 my-auto">
-    <%= client.name %>
-  </div>
-  <div class="col-4 my-auto">
-    <%= client.tel %>
-  </div>
-  <div class="col-4">
-    <div class="d-flex justify-content-end">
-      <%= link_to "編集", edit_client_path(client), class: "btn btn-sm btn-outline-primary me-2" %>
-      <%= button_to "削除", client, method: :delete, class: "btn btn-sm btn-outline-danger" %>
+<%= turbo_frame_tag client do %>
+  <div class="row py-2 border-top">
+    <div class="col-4 my-auto">
+      <%= client.name %>
+    </div>
+    <div class="col-4 my-auto">
+      <%= client.tel %>
+    </div>
+    <div class="col-4">
+      <div class="d-flex justify-content-end">
+        <%= link_to "編集", edit_client_path(client), class: "btn btn-sm btn-outline-primary me-2" %>
+        <%= button_to "削除", client, method: :delete, class: "btn btn-sm btn-outline-danger" %>
+      </div>
     </div>
   </div>
-</div>
+<% end %>

@@ -1,6 +1,7 @@
-first_names = [  "John",  "Jane",  "Jim",  "Sally",  "Tom",  "Kim",  "Mike",  "Emily",  "David",  "Nancy",]
+first_names = %w[John Jane Jim Sally Tom Kim Mike Emily David Nancy]
 
-last_names = [  "Doe",  "Smith",  "Johnson",  "Wilson",  "Brown",  "Davis",  "Clark",  "Martinez",  "Anderson",  "Taylor",]
+last_names = %w[Doe Smith Johnson Wilson Brown Davis Clark Martinez Anderson
+                Taylor]
 
 names = []
 100.times do |i|
@@ -8,5 +9,5 @@ names = []
 end
 
 100.times do |i|
-  Client.create(name: names[i % names.length], tel: "555-555-#{format('%04d', i+1)}")
+  Client.create(name: names[i % names.length], tel: "555-555-#{format('%04d', i + 1)}")
 end
