@@ -1,10 +1,17 @@
-<p style="color: green"><%= notice %></p>
+<div id="<%= dom_id @client %>">
+  <p>
+    <strong>名前:</strong>
+    <%= @client.name %>
+  </p>
 
-<%= render @client %>
+  <p>
+    <strong>携帯番号:</strong>
+    <%= @client.tel %>
+  </p>
+</div>
 
 <div>
-  <%= link_to "Edit this client", edit_client_path(@client) %> |
-  <%= link_to "Back to clients", clients_path %>
-
-  <%= button_to "Destroy this client", @client, method: :delete %>
+  <%= link_to "編集", edit_client_path(@client) %> |
+  <%= link_to "戻る", clients_path %>
+  <%= button_to "削除", @client, method: :delete %>
 </div>

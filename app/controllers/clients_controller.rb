@@ -31,7 +31,7 @@ class ClientsController < ApplicationController
     @client = Client.new(client_params)
 
     if @client.save
-      redirect_to @client, notice: "Client was successfully created."
+      redirect_to @client, notice: "お客様情報を登録しました"
     else
       render :new, status: :unprocessable_entity
     end
@@ -40,7 +40,7 @@ class ClientsController < ApplicationController
   # PATCH/PUT /clients/1
   def update
     if @client.update(client_params)
-      redirect_to @client, notice: "Client was successfully updated."
+      redirect_to @client, notice: "お客さま情報を更新しました"
     else
       render :edit, status: :unprocessable_entity
     end
@@ -49,7 +49,7 @@ class ClientsController < ApplicationController
   # DELETE /clients/1
   def destroy
     @client.destroy
-    redirect_to clients_url, notice: "Client was successfully destroyed."
+    redirect_to clients_url, notice: "お客様情報を削除しました"
   end
 
   private
