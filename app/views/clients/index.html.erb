@@ -1,6 +1,23 @@
 <p style="color: green"><%= notice %></p>
 
 <h1>Clients</h1>
+<%# ransackではsearch_form_forを使用する %>
+  <%= search_form_for @search do |f| %>
+    <%# contでLIKEの曖昧一致検索 %>
+    <%= f.label :name_cont, "名前" %>
+    <%= f.search_field :name_cont %>
+    <%# eqでLIKEの完全一致検索 %>
+    <%= f.label :tel_eq, "携帯番号" %>
+    <%= f.search_field :tel_eq %>
+
+    <%= f.submit %>
+
+    <%# 検索結果と検索フォームをクリアする %>
+    <%= link_to "クリア", clients_path %>
+  <% end %>
+
+  <%= sort_link(@search, :name) %>
+  <%= sort_link(@search, :tel) %>
 
 <div id="clients">
   <% @clients.each do |client| %>

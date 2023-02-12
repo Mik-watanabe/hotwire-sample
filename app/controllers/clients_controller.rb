@@ -3,8 +3,14 @@ class ClientsController < ApplicationController
 
   # GET /clients
   def index
-    @clients = Client.all
-    @clients = Client.page(params[:page])
+    # params[:q]には検索フォームで指定した検索条件が入る
+    @search = Client.ransack(params[:q])
+
+    # デフォルトのソートをデフォルトのid降順にする
+    @search.sorts = "id desc" if @search.sorts.empty?
+
+    # @search.resultで検索結果となる@clientsを取得する
+    @clients = @search.result.page(params[:page])
   end
 
   # GET /clients/1
